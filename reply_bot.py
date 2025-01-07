@@ -45,12 +45,79 @@ import random
 import datetime
 
 
+code_mode=0
 # 　返信メッセージを生成する関数
 def generate_response(from_user, text):
+    global code_mode
     res = []
     res.append(TextMessage(text=f"あー{from_user}さん。。。"))
-    if "こん" in text:
+    if "こん" in text[:2]:
         res.append(TextMessage(text="こんちゃー"))
+    elif"服装"in text or "コーデ" in text:
+        code_mode=1
+        res.append(TextMessage(text="今の季節は春、夏、秋、冬のどれですか？"))
+    elif code_mode==1 and"春" in text:
+        color_spring=["桜","猫柳","菜の花","若菜","藤紫","柳緑","紅梅","青藤"]
+        color_normal=["黒","白","赤","緑","青","黄","オレンジ","ピンク","水","紫","灰"]
+        color_season_num = len(color_spring)
+        color_normal_num = len(color_normal)
+        color_season_ran=random.randrange(color_season_num)
+        color_normal_ran=random.randrange(color_normal_num)
+        tops_spring=["レザージャケット", "ボリューム袖ブラウス", "ベスト", "ロングシャツ", "ボーダーカットソー", "キルティングコート", "スポーティアウター", "ニット"]
+        bottoms_spring = ["プリーツスカート", "デニム", "ワイドパンツ", "タイトスカート", "ワンピース", "スキニー", "キュロット"]
+        tops_spring_num=len(tops_spring)
+        bottoms_spring_num=len(bottoms_spring)
+        tops_ran=random.randrange(tops_spring_num)
+        bottoms_ran=random.randrange(bottoms_spring_num)
+        res.append(TextMessage(text=f"今日のおすすめコーデは{color_spring[color_season_ran]}色の{tops_spring[tops_ran]}と{color_normal[color_normal_ran]}色の{bottoms_spring[bottoms_ran]}です。ぜひ参考にせて下さい！！"))
+        code_mode = 0
+    elif code_mode==1 and "夏" in text:
+        color_summer = ["露草", "撫子", "砂", "藍鉄", "向日葵", "鈍", "赤銅", "麴","碧緑","紺碧"]
+        color_normal = ["黒", "白", "赤", "緑", "青", "黄", "オレンジ", "ピンク", "水", "紫", "灰"]
+        color_season_num = len(color_summer)
+        color_normal_num = len(color_normal)
+        color_season_ran = random.randrange(color_season_num)
+        color_normal_ran = random.randrange(color_normal_num)
+        tops_summer = ["Tシャツ", "ポロシャツ", "タンクトップ", "カットソー", "ブラウス", "ぺトラム", "ワイシャツ"]
+        bottoms_summer = ["プリーツスカート", "デニム", "ワイドパンツ", "タイトスカート", "ワンピース", "スキニー", "キュロット"]
+        tops_summer_num = len(tops_summer)
+        bottoms_summer_num = len(bottoms_summer)
+        tops_ran = random.randrange(tops_summer_num)
+        bottoms_ran = random.randrange(bottoms_summer_num)
+        res.append(TextMessage(text=f"今日のおすすめコーデは{color_summer[color_season_ran]}色の{tops_summer[tops_ran]}と{color_normal[color_normal_ran]}色の{bottoms_summer[bottoms_ran]}です。ぜひ参考にせて下さい！！"))
+        code_mode = 0
+    elif code_mode==1 and "秋" in text:
+        color_fall = ["赤丹", "栗梅茶", "黄朽葉", "竜胆", "栗鼠", "瞑", "紺子", "京緋","灰青","小豆鼠","左伊多津万"]
+        color_normal = ["黒", "白", "赤", "緑", "青", "黄", "オレンジ", "ピンク", "水", "紫", "灰"]
+        color_season_num=len(color_fall)
+        color_normal_num=len(color_normal)
+        color_season_ran = random.randrange(color_season_num)
+        color_normal_ran = random.randrange(color_normal_num)
+        tops_fall = ["Tシャツ", "ポロシャツ", "パーカー", "ベスト", "ブラウス", "トレーナー", "ワイシャツ"]
+        bottoms_fall = ["フレアスカート", "デニム", "ワイドパンツ", "タイトスカート", "ワンピース", "スキニー", "キュロット","スラックス"]
+        tops_fall_num = len(tops_fall)
+        bottoms_fall_num = len(bottoms_fall)
+        tops_ran = random.randrange(tops_fall_num)
+        bottoms_ran = random.randrange(bottoms_fall_num)
+        res.append(TextMessage(text=f"今日のおすすめコーデは{color_fall[color_season_ran]}色の{tops_fall[tops_ran]}と{color_normal[color_normal_ran]}色の{bottoms_fall[bottoms_ran]}です。ぜひ参考にせて下さい！！"))
+        code_mode = 0
+    elif code_mode==1 and "冬" in text:
+        color_winter = ["銀灰", "緋銅", "涅", "石板", "留紺", "深緑", "胡粉", "海松","漆黒","紅","藍鼠"]
+        color_normal = ["黒", "白", "赤", "緑", "青", "黄", "オレンジ", "ピンク", "水", "紫", "灰"]
+        color_season_num=len(color_winter)
+        color_normal_num=len(color_normal)
+        color_season_ran = random.randrange(color_season_num)
+        color_normal_ran = random.randrange(color_normal_num)
+        tops_winter = ["セーター", "ニット", "トレーナー", "ベスト", "シャツ", "パーカー", "コート", "ジャケット"]
+        bottoms_winter = ["ジーパン", "ワイドパンツ", "フレア", "ワンピース", "スラックス", "バギーパンツ", "ガウチョパンツ"]
+        tops_winter_num = len(tops_winter)
+        bottoms_winter_num = len(bottoms_winter)
+        tops_ran = random.randrange(tops_winter_num)
+        bottoms_ran = random.randrange(bottoms_winter_num)
+        res.append(TextMessage(
+            text=f"今日のおすすめコーデは{color_winter[color_season_ran]}色の{tops_winter[tops_ran]}と{color_normal[color_normal_ran]}色の{bottoms_winter[bottoms_ran]}です。ぜひ参考にせて下さい！！"))
+        code_mode=0
+
     elif "おは" in text:
         res.append(TextMessage(text="おはこんばんわ"))
     elif "何時" in text or "なんじ" in text:
